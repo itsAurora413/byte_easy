@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbyte.easy.forum.mapper.ForumMapper">
+  <resultMap id="BaseResultMap" type="com.mbyte.easy.forum.entity.Forum">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <id column="title" jdbcType="VARCHAR" property="title" />
+      <id column="forum" jdbcType="VARCHAR" property="forum" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+              id,
+      title, forum
+  </sql>
+
+<!--注意:在打开下面注释的时候，在执行添加和更新操作时，一定要添加事物，否则会造成无法添加和更新-->
+<!--
+ <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_forum
+       where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from  t_forum
+       where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mbyte.easy.forum.entity.Forum">
+    insert into t_forum (title, forum)
+    values (
+         title = #{title,jdbcType=VARCHAR},
+         forum = #{forum,jdbcType=VARCHAR}
+    )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.mbyte.easy.forum.entity.Forum">
+    insert into t_forum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="forum != null">
+        forum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+
+      <if test="forum != null">
+        forum = #{forum,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mbyte.easy.forum.entity.Forum">
+    update t_forum
+    <set>
+       <if test="title != null">
+         title = #{title,jdbcType=VARCHAR},
+      </if>
+       <if test="forum != null">
+         forum = #{forum,jdbcType=VARCHAR},
+      </if>
+    </set>
+       where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mbyte.easy.forum.entity.Forum">
+    update t_forum
+    set
+        title = #{title,jdbcType=VARCHAR},
+        forum = #{forum,jdbcType=VARCHAR},
+
+       where id = #{id,jdbcType=INTEGER}
+  </update>
+-->
+</mapper>

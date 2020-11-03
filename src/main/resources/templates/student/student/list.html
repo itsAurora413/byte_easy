@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="_meta :: header">
+    <title>列表</title>
+</head>
+<body>
+<div class="x-nav">
+          <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">列表</a>
+            <a>
+              <cite>管理</cite></a>
+          </span>
+    <a class="layui-btn layui-btn-small" style="float: right;height: 30px;line-height: 30px;margin-top: 5px;" onclick="location.reload()" title="刷新">
+        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body ">
+                    <form action="#" class="layui-form layui-col-space5" th:action="@{/student/student}" method="post">
+                                    <div class="layui-inline ">
+                                    <input type="text"  step="0.001" class="layui-input"  th:value="${searchInfo.userName}" name="userName" placeholder="搜索姓名" id="userName" />
+                                    </div>
+                                    <div class="layui-inline ">
+                                    <input type="text"  step="0.001" class="layui-input"  th:value="${searchInfo.sex}" name="sex" placeholder="搜索性别" id="sex" />
+                                    </div>
+                                    <div class="layui-inline ">
+                                    <input type="text"  step="0.001" class="layui-input"  th:value="${searchInfo.age}" name="age" placeholder="搜索年龄" id="age" />
+                                    </div>
+                                    <div class="layui-inline ">
+                                    <input type="text"  step="0.001" class="layui-input"  th:value="${searchInfo.studentText}" name="studentText" placeholder="搜索个人简介" id="studentText" />
+                                    </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn  layui-btn-success radius"><i class="layui-icon">&#xe615;</i>
+                            </button>
+                        </div>
+                        <div class="cl pd-5 bg-1 bk-gray " >
+							<span class="l">
+                                <a href="javascript:;"
+                                   onclick="deleteAll('/student/student/deleteAll')"
+                                   class="layui-btn  layui-btn-danger radius"><i class="layui-icon">&#xe64d;</i> 批量删除</a>
+						<a href="javascript:;"
+                           onclick="layer_show('添加','/student/student/addBefore',900,500)"
+                           class="layui-btn  layui-btn-normal radius"><i class="layui-icon">&#xe600;</i> 添加</a>
+							</span>
+                            <span class="r wei-height" style="float: right;margin-right: 20px">共有数据：<strong
+                                        th:text="${pageInfo.total}"></strong> 条</span>
+                        </div>
+                        <div class="layui-card-body" style="text-align: center">
+                            <table class="layui-table layui-form">
+                                <thead>
+                                <tr class="text-c">
+                                    <th width="25"><input type="checkbox" name="" value="" lay-filter="checkall" lay-skin="primary"/></th>
+                                    <th width="25">序号</th>
+                                        <th width="40">姓名</th>
+                                        <th width="40">性别</th>
+                                        <th width="40">年龄</th>
+                                        <th width="40">个人简介</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="text-c" th:if="${pageInfo.list.size() == 0}">
+                                    <td colspan="15"><strong>暂无数据</strong></td>
+                                </tr>
+                                <tr class="text-c" th:each="student,count:${pageInfo.list}">
+                                    <td><input type="checkbox" value="1" th:value="${student.id}"
+                                               name="id" lay-skin="primary"/></td>
+                                    <td th:text="${count.count}"></td>
+                                                <td th:text="${student.userName}"></td>
+                                                <td th:text="${student.sex}"></td>
+                                                <td th:text="${student.age}"></td>
+                                                <td th:text="${student.studentText}"></td>
+                                    <td class="td-manage">
+                                        <a title="编辑" href="javascript:;"
+                                           th:onclick="'javascript:layer_show(\'编辑\',\'/student/'+'student'+'/editBefore/'+${student.id}+'\',900,500)'"
+                                           class="ml-5" style="text-decoration:none"><i class="layui-icon">&#xe642;</i></a>
+                                        <a title="删除" href="javascript:;"
+                                           th:onclick="'javascript:deleteById(\'/student/'+'student'+'/delete/'+${student.id}+'\')'"
+                                           class="ml-5" style="text-decoration:none"><i class="layui-icon">&#xe640;</i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:include="_pagination :: page"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs">
+</div>
+<!--/_footer 作为公共模版分离出去-->
+<script>
+    layui.use(['laydate','form'], function(){
+        var laydate = layui.laydate;
+        var form = layui.form;
+        // 监听全选
+        form.on('checkbox(checkall)', function(data){
+
+            if(data.elem.checked){
+                $('tbody input').prop('checked',true);
+            }else{
+                $('tbody input').prop('checked',false);
+            }
+            form.render('checkbox');
+        });
+        form.on('select(selectchange)', function(data){
+            console.log(data.value); //得到被选中的值
+            var pageNo = $('#pageNo');
+            var Form = $('form')
+            pageNo.val(1);
+            Form.submit();
+            form.render('select');
+        });
+        //日期时间范围选择
+        laydate.render({
+
+        });
+        lay('.timeSpace').each(function(){
+            laydate.render({
+                elem: this
+                ,type: 'datetime'
+                ,range: true //或 range: '~' 来自定义分割字符
+            });
+        });
+    });
+
+
+</script>
+</body>
+</html>

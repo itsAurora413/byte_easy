@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>添加</title>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form form form-horizontal"  id="form-person-add" action="#" th:action="@{/admin/person/add}">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>：</label>
+                        <div class="layui-input-inline">
+                        <input type="layui-input" class="layui-input" t name="name"  placeholder="修改" id="name"/>
+                        </div>
+                        </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>：</label>
+                <div class="layui-input-block" >
+                    <script id="editor" name="content"  type="text/plain"  style="height:500px;">
+                    </script>
+                    </div>
+                        </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                </label>
+                <button  class="layui-btn" id="subbtn" type="submit" >
+                    增加
+                </button>
+                <button  class="layui-btn" id="reset" type="reset" >
+                    重置
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs"></div>
+<div th:replace="_ueditor :: ueditor"></div>
+ <!--/_footer 作为公共模版分离出去-->
+<!--请在下方写此页面业务相关的脚本-->
+<script>
+    layui.use(['form', 'layer','laydate'],function() {
+        $ = layui.jquery;
+        var form = layui.form,
+            laydate = layui.laydate,
+            layer = layui.layer;
+        lay('.timeSpace').each(function(){
+            laydate.render({
+                elem: this
+                ,trigger: 'click'
+                ,type: 'datetime'
+            });
+        });
+    });
+ $(function(){
+	$("#form-person-add").validate({
+		rules:{
+            name:{
+                required: true,
+			},
+            content:{
+                required: true,
+			},
+		},
+		onkeyup:false,
+		debug: true,
+		success:"valid",
+		submitHandler:function(form){
+				$(form).ajaxSubmit({
+				type: 'POST',
+				url: "/admin/person/add" ,
+				success: function(data){
+					if(data.code == "1"){
+						selfmsg('添加成功!',1,function(){
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload();
+							parent.layer.close(index);
+						});
+					}else{
+						selfmsg('添加失败!');
+					}
+				},
+                error: function(){
+					selfmsg('添加异常!',5);
+				}
+			});
+		}
+	});
+});
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

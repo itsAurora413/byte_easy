@@ -1,0 +1,39 @@
+<!--<aside class="Hui-aside" th:fragment="menu">-->
+<!--	<div class="menu_dropdown bk_2">-->
+<!--		<dl class="my-dl" th:each="one,oneStat:${sysMenu}" th:if="${one.parentId == 1}">-->
+<!--			<dt><i class="Hui-iconfont">&#xe616;</i>&nbsp;<span th:text="${one.name}"/><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>-->
+<!--			<dd class="my-dd">-->
+<!--				<ul >-->
+<!--					<li th:each="two,twoStat:${sysMenu}"  th:if="${two.parentId eq one.id}">-->
+<!--						<a th:attr="data-href=${two.url},data-title=${two.name}"  href="javascript:;" th:text="${two.name}">二级菜单</a>-->
+<!--					</li>-->
+<!--				</ul>-->
+<!--			</dd>-->
+<!--		</dl>-->
+<!--	</div>-->
+<!--</aside>-->
+
+
+
+<div class="left-nav" th:fragment="menu">
+	<div id="side-nav">
+		<ul id="nav">
+			<li th:each="one,oneStat:${sysMenu}" th:if="${one.parentId == 1}">
+				<a href="javascript:;">
+
+					<i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+					<cite th:text="${one.name}"></cite>
+					<i class="iconfont nav_right">&#xe697;</i></a>
+
+				<ul class="sub-menu">
+
+					<li th:each="two,twoStat:${sysMenu}"  th:if="${two.parentId eq one.id}">
+							<a th:onclick="xadmin.add_tab([[${two.name}]],[[${two.url}]])">
+							<i class="iconfont">&#xe6a7;</i>
+							<cite  th:text="${two.name}"></cite></a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

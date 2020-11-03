@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbyte.easy.student.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.mbyte.easy.student.entity.Student">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <id column="user_name" jdbcType="VARCHAR" property="userName" />
+      <id column="sex" jdbcType="INTEGER" property="sex" />
+      <id column="age" jdbcType="INTEGER" property="age" />
+      <id column="student_text" jdbcType="VARCHAR" property="studentText" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+              id,
+      user_name, sex, age, student_text
+  </sql>
+
+<!--注意:在打开下面注释的时候，在执行添加和更新操作时，一定要添加事物，否则会造成无法添加和更新-->
+<!--
+ <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_student
+       where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from  t_student
+       where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mbyte.easy.student.entity.Student">
+    insert into t_student (user_name, sex, age, student_text)
+    values (
+         user_name = #{userName,jdbcType=VARCHAR},
+         sex = #{sex,jdbcType=INTEGER},
+         age = #{age,jdbcType=INTEGER},
+         student_text = #{studentText,jdbcType=VARCHAR}
+    )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.mbyte.easy.student.entity.Student">
+    insert into t_student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="studentText != null">
+        student_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+
+      <if test="studentText != null">
+        student_text = #{studentText,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mbyte.easy.student.entity.Student">
+    update t_student
+    <set>
+       <if test="userName != null">
+         user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+       <if test="sex != null">
+         sex = #{sex,jdbcType=INTEGER},
+      </if>
+       <if test="age != null">
+         age = #{age,jdbcType=INTEGER},
+      </if>
+       <if test="studentText != null">
+         student_text = #{studentText,jdbcType=VARCHAR},
+      </if>
+    </set>
+       where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mbyte.easy.student.entity.Student">
+    update t_student
+    set
+        user_name = #{userName,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
+        age = #{age,jdbcType=INTEGER},
+        student_text = #{studentText,jdbcType=VARCHAR},
+
+       where id = #{id,jdbcType=BIGINT}
+  </update>
+-->
+</mapper>
