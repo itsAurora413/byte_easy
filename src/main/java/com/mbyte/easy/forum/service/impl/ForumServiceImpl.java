@@ -17,4 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ForumServiceImpl extends ServiceImpl<ForumMapper, Forum> implements IForumService {
 
+    @Override
+    public Forum getByTitile(String test) {
+        Forum forum = getBaseMapper().selectByTitile(test);
+        forum.setForum(forum.getForum().substring(0,10));
+        return forum;
+    }
 }

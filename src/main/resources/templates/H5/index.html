@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script th:src="@{/js/h5/index.js}"></script>-->
+</head>
+<body>
+    <div>
+        <ul id="show-forum">
+            <li>
+                <h1>123456</h1>
+                <p>1245</p>
+                <div>
+                    <img src="" alt="">
+                    6
+                    <img src="" alt="">
+                    5
+                </div>
+            </li>
+
+            <li th:each="tforum:${forumList}">
+                <h1 th:text="${tforum.title}"></h1>
+                <p th:text="${tforum.forum}"></p>
+<!--                <div>-->
+<!--                    <img th:text="${}" src="" alt="">-->
+<!--                    6-->
+<!--                    <img th:text="${}" src="" alt="">-->
+<!--                    5-->
+<!--                </div>-->
+            </li>
+
+        </ul>
+    </div>
+
+
+<!--<script>-->
+
+<!--    $(function(){-->
+<!--        show();-->
+<!--    })-->
+
+<!--    function show (){-->
+
+<!--        $.ajax({-->
+<!--            url:"/like",-->
+<!--            type:"post",-->
+<!--            dataType:"json",-->
+<!--            data:{-->
+<!--                "title":title,-->
+<!--                "forum":forum,-->
+<!--            },-->
+<!--            success:function(data){-->
+<!--                console.log(data);-->
+<!--                if(data.code==200){-->
+<!--                    var html="";-->
+<!--                    html+="<li>";-->
+<!--                    for (let student of data.data){-->
+<!--                        html += "<h1>" + forum.title + "</h1>";-->
+<!--                        html += "<p>" + forum.forum + "</p>";-->
+<!--                        html += "<div><img src=''>" + "12" + "<img src=''>" +  "4"  + "</div>";-->
+<!--                    }-->
+<!--                    html+="</li>";-->
+<!--                    $("#show-forum").html(html);-->
+<!--                }-->
+
+<!--            },-->
+<!--            error:function(a,b,c){-->
+<!--                console.log("异常了");-->
+<!--                console.log(a);-->
+<!--                console.log(b);-->
+<!--                console.log(c);-->
+<!--            }-->
+<!--        });-->
+
+<!--    }-->
+
+<!--</script>-->
+
+</body>
+</html>

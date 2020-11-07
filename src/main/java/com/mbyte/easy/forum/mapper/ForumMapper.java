@@ -2,6 +2,7 @@ package com.mbyte.easy.forum.mapper;
 
 import com.mbyte.easy.forum.entity.Forum;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ForumMapper extends BaseMapper<Forum> {
 
+    Forum selectByTitile(@Param("test") String test);
 }
