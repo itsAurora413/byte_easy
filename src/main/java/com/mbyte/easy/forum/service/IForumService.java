@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IForumService extends IService<Forum> {
 
     Forum getByTitile(String test);
+
+
 }

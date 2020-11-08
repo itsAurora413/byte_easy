@@ -14,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IForumUserService extends IService<ForumUser> {
 
     boolean like(Integer forumId, Integer userId, Integer flag);
+
+    ForumUser getByForumId(Integer forumId);
+
 }

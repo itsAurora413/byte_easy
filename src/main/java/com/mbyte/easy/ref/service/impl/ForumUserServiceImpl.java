@@ -1,5 +1,6 @@
 package com.mbyte.easy.ref.service.impl;
 
+import com.mbyte.easy.forum.entity.Forum;
 import com.mbyte.easy.ref.entity.ForumUser;
 import com.mbyte.easy.ref.mapper.ForumUserMapper;
 import com.mbyte.easy.ref.service.IForumUserService;
@@ -31,5 +32,12 @@ public class ForumUserServiceImpl extends ServiceImpl<ForumUserMapper, ForumUser
                return updateById(forumUser);
             }
         }
+    }
+
+    @Override
+    public ForumUser getByForumId(Integer forumId) {
+        ForumUser forumUser = getBaseMapper().selectByForumId(forumId);
+
+        return forumUser;
     }
 }

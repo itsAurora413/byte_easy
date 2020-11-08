@@ -1,5 +1,6 @@
 package com.mbyte.easy.h5.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -7,6 +8,7 @@ import com.mbyte.easy.common.controller.BaseController;
 import com.mbyte.easy.common.web.AjaxResult;
 import com.mbyte.easy.forum.entity.Forum;
 import com.mbyte.easy.forum.service.IForumService;
+import com.mbyte.easy.ref.entity.ForumUser;
 import com.mbyte.easy.ref.service.IForumUserService;
 import com.mbyte.easy.util.PageInfo;
 import javafx.scene.text.Text;
@@ -65,4 +67,16 @@ public class H5IndexController extends BaseController  {
         model.addAttribute("forumList", list);
         return "/H5/index";
     }
+
+    @RequestMapping("/flag")
+    @ResponseBody
+    public String flag(Model model){
+
+        List<ForumUser> list = forumUserService.list();
+        model.addAttribute("forumUserList",list);
+
+        return "/H5/index";
+    }
+
+
 }

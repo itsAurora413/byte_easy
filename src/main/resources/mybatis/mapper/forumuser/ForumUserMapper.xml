@@ -14,6 +14,9 @@
     <select id="selectByMyIds" resultType="com.mbyte.easy.ref.entity.ForumUser" >
         select * from  ref_forum_user where forum_id = #{forumId}  and user_id = #{userId}
     </select>
+    <select id="selectByForumId" resultType="com.mbyte.easy.ref.entity.ForumUser">
+         select * from  ref_forum_user where forum_id = #{forumId}
+    </select>
 
     <!--注意:在打开下面注释的时候，在执行添加和更新操作时，一定要添加事物，否则会造成无法添加和更新-->
 <!--

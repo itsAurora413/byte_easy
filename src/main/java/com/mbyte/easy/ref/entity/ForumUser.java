@@ -3,6 +3,7 @@ package com.mbyte.easy.ref.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.mbyte.easy.common.entity.BaseEntity;
+import com.mbyte.easy.forum.entity.Forum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -34,6 +35,8 @@ public class ForumUser extends BaseEntity {
     private Integer userId;
 
     private Integer flag;
+
+    private Forum forumEntity;
 
 
     public ForumUser(Integer forumId, Integer userId, Integer flag) {
